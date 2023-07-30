@@ -1,33 +1,37 @@
 module.exports = agence = [
     {
-        "idAgence": "001",
-        "designation": "Agence 1",
-        "email": "agence1@example.com",
-        "password": "mot_de_passe_1",
+        "idAgence": "003",
+        "designation": "Agence 3",
+        "email": "agence3@example.com",
+        "password": "mot_de_passe_3",
         "contact": "0123456789",
-        "descriptionAgence": "Description de l'agence 1",
+        "descriptionAgence": "Description de l'agence 3",
         "publication": [
             {
-                "description": "Publication 1 Agence 1",
-                "photo": ["photo1.jpg", "photo2.jpg"]
+                "description": "Publication 1 Agence 3",
+                "photo": ["photo7.jpg", "photo8.jpg"]
             },
             {
-                "description": "Publication 2 Agence 1",
-                "photo": ["photo3.jpg", "photo4.jpg"]
+                "description": "Publication 2 Agence 3",
+                "photo": ["photo9.jpg", "photo10.jpg"]
             }
         ]
     },
     {
-        "idAgence": "002",
-        "designation": "Agence 2",
-        "email": "agence2@example.com",
-        "password": "mot_de_passe_2",
-        "contact": "9876543210",
-        "descriptionAgence": "Description de l'agence 2",
+        "idAgence": "004",
+        "designation": "Agence 4",
+        "email": "agence4@example.com",
+        "password": "mot_de_passe_4",
+        "contact": "0123456789",
+        "descriptionAgence": "Description de l'agence 4",
         "publication": [
             {
-                "description": "Publication 1 Agence 2",
-                "photo": ["photo5.jpg", "photo6.jpg"]
+                "description": "Publication 1 Agence 4",
+                "photo": ["photo11.jpg", "photo12.jpg"]
+            },
+            {
+                "description": "Publication 2 Agence 4",
+                "photo": ["photo13.jpg", "photo14.jpg"]
             }
         ]
     }
