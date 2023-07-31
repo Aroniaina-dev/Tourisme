@@ -22,6 +22,9 @@ const port = process.env.PORT || 3000
 
 //liste des routes pour l'application
 app.use('/api/agence/', agenceRoute);
+
+
+
 app.use('/', routes);
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
