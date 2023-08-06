@@ -1,7 +1,8 @@
 const agenceDb = require('../db/agence.db');
 const Agence = require('../models/agence');
-
+const bcrypt = require('bcrypt');
 exports.login = (req, res, next) => {
+    console.log('Login agence')
     Agence.findOne({ email: {$eq:req.body.email} })
       .then(user => {
           if (!user) {
@@ -40,6 +41,7 @@ exports.generateData = async (req, res, next) =>{
 
 exports.getById = async (req, res, next) =>{
     try {
+        console.log('generate Agence By Id')
         const filter = {}
         if (req.params.id) filter._id = req.params.id
         else {
@@ -60,7 +62,7 @@ exports.getAll = async (req, res, next) =>{
         const filter = {}
         if (req.query.id) filter._id = req.query.id
         const result = await Agence.find(filter, null, { sort: { updatedAt: 1 } })
-        res.json(result)
+        res.json(result);
     } catch (error) {
         console.log(error)
         res.status(500).json({ msg: error })
@@ -68,24 +70,35 @@ exports.getAll = async (req, res, next) =>{
 }
 
 exports.signup = (req, res, next) => {
- 
-    let Agences = new Agence(req.body)
-        Agence.save((err,doc)=>{
-         if (!err){
-             console.log("atoo");
-             res.send(doc);
-         }
-     else {
-         if (err.code == 11000)
-             res.status(422).send(['Duplicate email adrress found.']);
-         else
-             return next(err);
-     }
-         // .then(Userclients => {res.json({ message: 'Compte créé !' })})
-         // .catch(error => {res.json({ message : error.message })});
- })
- }
- 
+    console.log('Inscription');
+
+    // Crypter le mot de passe avant de l'enregistrer dans la base de données
+    bcrypt.hash(req.body.password, 10) // Utilisez un sel de 10 tours (vous pouvez ajuster le coût selon vos besoins)
+        .then(hash => {
+            let agenceRegister = new Agence({
+                email: req.body.email,
+                password: hash, // Stockez le mot de passe crypté
+                // Utilisez les autres champs du req.body pour le modèle Agence
+                designation: req.body.designation,
+                contact: req.body.contact,
+                descriptionAgence: req.body.descriptionAgence,
+                // Ajoutez d'autres champs ici selon votre modèle Agence
+            });
+
+            agenceRegister.save((err, doc) => {
+                if (!err) {
+                    console.log("Inscription réussie");
+                    res.send(doc);
+                } else {
+                    if (err.code == 11000)
+                        res.status(422).send(['Duplicate email address found.']);
+                    else
+                        return next(err);
+                }
+            });
+        })
+        .catch(error => res.status(500).json({ error }));
+};
 
 // exports.insertAgence = async (req, res, next) =>{
 //     try {
@@ -120,7 +133,9 @@ exports.modifAgence = async (req, res, next) =>{
 exports.deleteAgence = async (req, res, next) =>{
     try {
         const filter = {}
+        console.log("Delete Agence: ", req.params.id);
         if (req.params.id) filter._id = req.params.id
+       
         else {
             res.status(400).json({ msg: 'ID required' })
             return
