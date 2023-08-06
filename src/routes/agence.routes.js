@@ -10,19 +10,19 @@ router.get('/generate', Controll.generateData);
 router.get('/:id', Controll.getById);
 
 // localhost:3000/api/agence/
-router.get('/', Controll.getAll);
+router.get('/find/findAll', Controll.getAll);
 
 // localhost:3000/api/agence/
-router.post('/', Controll.signup);
+router.post('/login/inscription', Controll.signup);
 
 // localhost:3000/api/agence/
-router.post('/login', Controll.login);
+router.post('/login/seConnecter', Controll.login);
 
 // localhost:3000/api/agence/
-router.put('/', Controll.modifAgence);
+router.put('/mofidAgence', Controll.modifAgence);
 
 // localhost:3000/api/agence/64c67e89651d776487275fe6
-router.delete('/:id', Controll.deleteAgence);
+router.delete('/delete/:id', Controll.deleteAgence);
 
 // localhost:3000/api/agence/64c57f94d1d6db7ae0325383/publication/64c57f94d1d6db7ae0325384
 router.get('/:agenceId/publication/:publicationId', Controll.getPublicationById);
@@ -39,7 +39,7 @@ router.post('/:id/publication', Controll.insertPublication);
 // localhost:3000/api/agence/64c57f94d1d6db7ae0325383/publication/64c57f94d1d6db7ae0325384/photo
 router.post('/:id/publication/:idPublication/photo', Controll.addPhotoPublication);
 
-// localhost:3000/api/agence/64c57f94d1d6db7ae0325383/publication/64c57f94d1d6db7ae0325385/photo/0
+// localhost:3000/api/agence/64c57f94d1d6db7ae0325383/publication/64c57f94d1d6db7ae0325385/photo/0 
 router.delete('/:id/publication/:idPublication/photo/:photoIndex', Controll.deletePhotoPublication);
 
 module.exports = router;
